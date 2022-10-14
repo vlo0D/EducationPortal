@@ -1,0 +1,16 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+       <div class="row">
+        <div class="col-xs-12 col-md-4"><span>@User.Identity.Name</span></div>
+        <div class="col">
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input type="submit" class="btn btn-primary btn-light" value="Log Out">
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <a class="btn btn-primary btn-light" asp-controller="Account" asp-action="Login">Login</a>
+    <a class="btn btn-primary btn-warning" asp-controller="Account" asp-action="Register">Register</a>
+}

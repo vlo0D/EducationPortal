@@ -1,0 +1,45 @@
+﻿@model EducationPortal.Web.Models.UserModel.UserProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+<div class = "row">
+    <h5 class = "text-info">Full Name:</h5>
+    <p>@Model.FisrtName @Model.LastName</p>
+    <h5 class = "text-info">Email:</h5>
+    <p>@Model.Email</p>
+</div>
+<div class = "row">
+<div class = "col border bg-light">
+    <h5 class = "text-info">Your Skills</h5>
+    @await Html.PartialAsync("Partial/MySkillsPartial", Model.Skills)
+</div>
+<br />
+<div class = "col border bg-light">
+    <h5 class="text-info">Your Materials</h5>
+    @await Html.PartialAsync("Partial/MyMaterialsPartial", Model.Materials)
+</div>
+</div>
+<div class ="row">
+    <div class = "col border bg-light">
+        <h5 class = "text-info">Your passed courses</h5>
+        @if (Model.PassedCourses.Count == 0)
+        {
+            <p class="text-warning">You don't pass any course yet</p>
+        }
+        else
+        {
+            @await Html.PartialAsync("Partial/NameCoursesPartial", Model.PassedCourses)
+        }
+    </div>
+    <div class = "col border bg-light">
+        <h5 class = "text-info">Your in progress courses</h5>
+        @if (Model.InProgressCourse.Count == 0)
+        {
+            <p class="text-warning">You don't enter to any course yet</p>
+        }
+        else
+        {
+            @await Html.PartialAsync("Partial/NameCoursesPartial", Model.InProgressCourse)
+        }
+    </div>
+</div>

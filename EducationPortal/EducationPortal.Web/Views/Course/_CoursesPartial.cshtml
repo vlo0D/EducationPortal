@@ -1,0 +1,45 @@
+﻿@model EducationPortal.Web.Models.CourseViewModel
+
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @foreach (var course in Model.Courses)
+            {
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                                <rect width="100%" height="100%" fill="#55595c"></rect>
+                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">@course.NameOfCourse</text>
+                            </svg>
+                        </a>
+                        <div class="card-body">
+                            <p class="card-text">
+                                @course.Description
+                            </p>
+                            <div class="d-flex justify-content-between align-content-center">
+                                <div class="btn-group">
+                                    @if (course.UserNameCreate == User.Identity.Name)
+                                    {
+                                        <span> <img src="/src/key.svg" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Created by you" alt="Created by you" width="20" height="20"></span>
+                                    }
+                                </div>
+                                @if (course.UserHas.Value)
+                                {
+                                    <small class="text-muted">You have it</small>
+                                }
+                                else
+                                {
+                                    <form asp-controller="User" asp-action="EnterToCourse" method="post" asp-route-id="@course.Id">
+                                        <input class="btn btn-sm btn-outline-secondary" type="submit" value="Enter">
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

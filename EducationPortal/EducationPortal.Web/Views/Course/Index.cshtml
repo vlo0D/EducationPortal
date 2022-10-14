@@ -1,0 +1,75 @@
+﻿@model EducationPortal.Web.Models.CourseViewModel
+@{
+    ViewData["Title"] = "All Courses";
+}
+
+<div class="text-center">
+    <h2>All Courses</h2>
+    <div class="container">
+        <div>
+            <p><a asp-action="Create">Add New Course</a></p>
+        </div>
+    </div>
+
+    @if (Model.Courses.Count() == 0)
+    {
+        <h2>No courses</h2>
+    }
+    else
+    {
+        <div class="col-3">
+            <input name="search" type="search" id="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </div>
+        <div id="result">
+            @await Html.PartialAsync("_CoursesPartial", Model)
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= Model.PageViewModel.TotalPages; i++)
+                {
+                    if (@Model.PageViewModel.PageNumber == i)
+                    {
+                        <li class="page-item active" aria-current="page"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
+                    }
+                }
+            </ul>
+        </nav>
+    }
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+        document.getElementById('search').addEventListener('keyup', function (e) {
+        LiveSearch()
+        });
+
+        function LiveSearch() {
+        let value = document.getElementById('search').value
+
+        $.ajax({
+        type: "POST",
+        url: "/Course/SearchCourses",
+
+        data: { search: value },
+        datatype: "html",
+        success: function (data) {
+
+        $('#result').html(data);
+        }
+        });
+        }
+
+        let timeout = null;
+
+    document.getElementById('search').addEventListener('keyup', function (e) {
+          clearTimeout(timeout);
+
+          timeout = setTimeout(function () {
+                 LiveSearch()
+          }, 800);
+     });
+</script>

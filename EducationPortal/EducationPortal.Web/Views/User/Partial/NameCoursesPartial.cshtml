@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EducationPortal.BLL.DTO.CourseDTO>
+<table class="table">
+    <tr>
+        <th>Name of Course</th>
+        <th>Progress</th>
+    </tr>
+    @foreach (var course in Model)
+    {
+        <tr>
+            <td><a asp-controller="Course" asp-action="Details" asp-route-id="@course.Id">@course.NameOfCourse</a></td>
+            <td>
+                <div class="progress">
+                    @if (course.CourseProgress == 100)
+                    {
+                        <div class="progress-bar bg-success" role="progressbar" style="width: @course.CourseProgress%" aria-valuenow="@course.CourseProgress" aria-valuemin="0" aria-valuemax="100">@course.CourseProgress%</div>
+                    }
+                    else
+                    {
+                        <div class="progress-bar bg-warning text-dark" role="progressbar" style="width: @course.CourseProgress%" aria-valuenow="@course.CourseProgress" aria-valuemin="0" aria-valuemax="100">@course.CourseProgress%</div>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+</table>

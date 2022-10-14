@@ -1,0 +1,21 @@
+﻿@model Dictionary<string, int>
+
+@if (Model.Count == 0)
+{
+<p>You don't have any skills yet</p>
+}
+else{
+<table class="table">
+    <tr>
+        <th>Name of skill</th>
+        <th>Points</th>
+    </tr>
+    @foreach (var skill in Model)
+    {
+        <tr>
+            <td>@skill.Key</td>
+            <td>@skill.Value</td>
+        </tr>
+    }
+</table>
+}

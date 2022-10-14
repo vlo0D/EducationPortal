@@ -1,0 +1,23 @@
+﻿@model EducationPortal.BLL.DTO.VideoMaterialDTO
+@{
+    ViewData["Title"] = "Video Details";
+}
+<div class="text-centr">
+    <h2 class="text-center">Material Information</h2>
+    <h5><b>Video Name</b> "@Model.Name"</h5>
+    <p><b>Quality:</b> @Model.Quality</p>
+    <p><b>Duration:</b> @Model.Duration.Hour:@Model.Duration.Minute:@Model.Duration.Second</p>
+    <br />
+    @if (User.IsInRole("admin") || User.Identity.Name == Model.UserNameCreate)
+    {
+        <p class="text-info">Last Edit Time: @Model.Created</p>
+        <p class="text-info">Edit User: @Model.UserNameCreate</p>
+        <form asp-action="edit" method="get" asp-route-id="@Model.Id">
+            <input type="submit" value="Edit">
+        </form>
+
+        <form asp-controller="material" asp-action="Delete" method="post" asp-route-id="@Model.Id">
+            <input type="submit" value="Delete">
+        </form>
+    }
+</div>

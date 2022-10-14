@@ -1,0 +1,16 @@
+﻿@model EducationPortal.BLL.DTO.VideoMaterialDTO;
+
+<h2>Adding Video</h2>
+<form asp-controller="Material" asp-action="AddVideo">
+    <p>
+        <label asp-for="Name">Name</label>
+        <input type= "text" asp-for= "Name" />
+        <label asp-for="Quality">Quality</label>
+        <input type= "text" asp-for= "Quality" />
+        <label asp-for="Duration">Duration</label>
+        <input type= "time" asp-for= "Duration" />
+    </p>
+    <p>
+        <input type ="submit" value="Send"/>
+    </p>
+</form>

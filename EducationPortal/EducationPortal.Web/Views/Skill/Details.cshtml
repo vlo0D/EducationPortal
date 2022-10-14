@@ -1,0 +1,23 @@
+﻿@model EducationPortal.BLL.DTO.SkillDTO
+
+@{
+    ViewData["Title"] = "Skill Detail";
+}
+
+<div>
+    <h2 class="text-center">Skill Information</h2>
+    <h5><b>Skill Name:</b> @Model.Name</h5>
+    @if (User.IsInRole("admin") || User.Identity.Name == Model.UserNameCreate)
+    {
+        <br />
+        <p class="text-info">Last Edit Time: @Model.Created</p>
+        <p class="text-info">Edit User: @Model.UserNameCreate</p>
+        <form asp-controller="Skill" asp-action="edit" method="get" asp-route-id="@Model.Id">
+            <input type="submit" class="btn-primary" value="Edit" />
+        </form>
+
+        <form asp-controller="Skill" asp-action="Delete" method="post" asp-route-id="@Model.Id">
+            <input type="submit" class="btn" value="Delete">
+        </form>
+    }
+</div>

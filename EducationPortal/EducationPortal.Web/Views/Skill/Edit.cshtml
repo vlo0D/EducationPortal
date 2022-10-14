@@ -1,0 +1,16 @@
+﻿@model EducationPortal.BLL.DTO.SkillDTO
+
+@{
+    ViewData["Title"] = "Skill Edit";
+}
+
+<h2>Adding Skill</h2>
+<form asp-action="Edit" asp-controller="Skill" method="post" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Name">Name</label>
+        <input type= "text" asp-for= "Name" required/><span class="text-danger" asp-validation-for="Name"></span>
+    </p>
+    <p>
+        <input type ="submit" value="Send"/>
+    </p>
+</form>

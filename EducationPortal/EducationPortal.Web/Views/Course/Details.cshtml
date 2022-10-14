@@ -1,0 +1,94 @@
+﻿@model EducationPortal.Web.Models.CourseVM
+
+@{
+    ViewData["Title"] = "Details Course";
+}
+
+<div>
+    <h2 class="text-center">Course Details</h2>
+    <h5><b>Name of Course:</b> "@Model.NameOfCourse"</h5>
+    <p><b>Description:</b></p>
+    <p>@Model.Description</p>
+    <h5><b>Materials:</b></h5>
+    <table class="table">
+        <tr>
+            <th>Name of Material</th>
+            <th>Type of Material</th>
+            <th></th>
+        </tr>
+        @foreach (var material in Model.Materials)
+        {
+            <tr>
+                <td><a asp-controller="Material" asp-action="Details" asp-route-id="@material.Id">@material.Name</a></td>
+                <td>
+                    @if (material is EducationPortal.BLL.DTO.BookMaterialDTO)
+                    {
+                        <div>Book</div>
+                    }
+                    else if (material is EducationPortal.BLL.DTO.VideoMaterialDTO)
+                    {
+                        <div>Video</div>
+                    }
+                    else
+                    {
+                        <div>Article</div>
+                    }
+                </td>
+                @if (material.IsPassed)
+                {
+                    <td>Passed</td>
+                }
+                else if (Model.UserHas.Value)
+                {
+                    <td>
+                        <form asp-controller="user" asp-action="PassMaterial" method="post" asp-route-materialId="@material.Id" asp-route-courseId="@Model.Id">
+                            <input type="submit" value="Pass">
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+    <h5><b>Skills:</b></h5>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+        </tr>
+        @foreach (var skill in Model.Skills)
+        {
+            <tr>
+                <td>@skill.Name</td>
+            </tr>
+        }
+    </table>
+    <div class="row">
+        @if (User.IsInRole("admin") || User.Identity.Name == Model.UserNameCreate)
+        {
+            <br />
+            <p class="text-info">Last Edit Time: @Model.Created</p>
+            <p class="text-info">Edit User: @Model.UserNameCreate</p>
+            <div class="col">
+                <form asp-controller="Course" asp-action="Delete" method="post" asp-route-id="@Model.Id">
+                    <input class="btn btn-dark" type="submit" value="Delete">
+                </form>
+            </div>
+            <div class="col">
+                <form asp-controller="Course" asp-action="Edit" method="get" asp-route-id="@Model.Id">
+                    <input class="btn btn-warning" type="submit" value="Edit">
+                </form>
+            </div>
+        }
+        <div class="col text-end">
+            @if (Model.UserHas.Value)
+            {
+                <button class="btn btn-outline-dark" disabled>You already have this course</button>
+            }
+            else
+            {
+                <form asp-controller="User" asp-action="EnterToCourse" method="post" asp-route-id="@Model.Id">
+                    <input class="btn btn-primary" type="submit" value="Enter to the course">
+                </form>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model EducationPortal.BLL.DTO.VideoMaterialDTO;
+@{
+    ViewData["Title"] = "Edit Video";
+}
+
+<h2>Edit Video "@Model.Name"</h2>
+<form asp-controller="Material" asp-action="EditVideo" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Name">Name</label>
+        <input value = "@Model.Name" type= "text" asp-for= "Name" />
+        <label asp-for="Quality">Quality</label>
+        <input value = "@Model.Quality" type= "text" asp-for= "Quality" />
+        <label asp-for="Duration">Duration</label>
+        <input value = "@Model.Quality" type= "time" asp-for= "Duration" />
+    </p>
+    <p>
+        <input type ="submit" value="Send"/>
+    </p>
+</form>

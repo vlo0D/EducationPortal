@@ -1,0 +1,22 @@
+﻿@model EducationPortal.BLL.DTO.BookMaterialDTO;
+@{
+    ViewData["Title"] = "Edit Book";
+}
+<h2>Edit Book "@Model.Name"</h2>
+<form asp-controller="Material" asp-action="EditBook" asp-route-id="@Model.Id">
+    <p>
+        <label asp-for="Name">Name</label>
+        <input value="@Model.Name" type= "text" asp-for= "Name" required/>
+        <label asp-for="Author">Author</label>
+        <input value="@Model.Author" type= "text" asp-for= "Author" required/>
+        <label asp-for="Pages">Pages</label>
+        <input value="@Model.Pages" type= "number" asp-for= "Pages" required/>
+        <label asp-for = "Format">Format</label>
+        <input value="@Model.Format" type= "text" asp-for= "Format" required/>
+        <label asp-for = "Year">Year</label>
+        <input value="@Model.Year" type= "number" asp-for= "Year" required/>
+    </p>
+    <p>
+        <input type ="submit" value="Send"/>
+    </p>
+</form>

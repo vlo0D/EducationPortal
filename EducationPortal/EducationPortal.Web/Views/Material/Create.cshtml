@@ -1,0 +1,31 @@
+﻿@model EducationPortal.BLL.DTO.MaterialDTO
+
+@{
+    ViewData["Title"] = "Create Material";
+}
+
+<select class="form-select" onchange="func(this.value)">
+    <option value="">--Please choose an type--</option>
+  <option value="article">Article</option>
+  <option value="book">Book</option>
+  <option value="video">Video</option>
+</select>
+<div id ="addMaterial">
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>  
+function func (link){
+    if(link=='article'){
+        $('#addMaterial').load('/material/AddArticle');
+    }
+    else if (link == 'book')
+    {
+        $('#addMaterial').load('/material/AddBook');
+    }
+    else if(link == 'video')
+    {
+        $('#addMaterial').load('/material/AddVideo');
+    }
+}
+</script>
